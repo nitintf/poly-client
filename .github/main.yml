@@ -1,0 +1,97 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  build:
+    name: 🎭 Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.0
+
+      - name: 📥 Download deps
+        run: yarn install
+
+      - name: ⚡ Run Build
+        run: yarn build
+
+  lint:
+    name: ⬣ ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.0
+
+      - name: 📥 Download deps
+        run: yarn install
+
+      - name: 🔬 Lint
+        run: yarn lint
+
+  test:
+    name: ⚡ Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.12.0
+
+      - name: 📥 Download deps
+        run: yarn install
+
+      - name: ⚡ Run Test
+        run: yarn test:cov
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+
+  # E2E:
+  #   name: 🎭 E2E
+  #   runs-on: ubuntu-latest
+  #   timeout-minutes: 60
+  #   steps:
+  #     - name: ⬇️ Checkout repo
+  #       uses: actions/checkout@v3
+
+  #     - name: ⎔ Setup node
+  #       uses: actions/setup-node@v3
+  #       with:
+  #         node-version: 16.19.1
+
+  #     - name: 📥 Download deps
+  #       run: yarn install
+
+  #     - name: 🏄 Copy test env vars
+  #       run: cp .env.example .env
+
+  #     - name: Run E2E tests
+  #       run: yarn test:e2e
