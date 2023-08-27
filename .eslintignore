@@ -3,7 +3,7 @@ src/graphql/generated/
 src/openapi
 .eslintrc.cjs
 stylelint.config.cjs
-stylelint-tsx.config.js
+stylelint-tsx.config.cjs
 vite.config.ts
 .lintstagedrc.json
 node_modules
