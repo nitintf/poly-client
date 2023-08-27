@@ -1,0 +1,23 @@
+{
+  "name": "GraphQL",
+  "schemaPath": "./graphql.schema.json",
+  "extensions": {
+    "endpoints": {
+      "Local": {
+        "url": "http://localhost:8080/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL",
+          "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsbHJ5dTR5cjAwMDBuemo2bHhwYjN1NHUiLCJlbWFpbCI6ImFkbWluQGdtYWlsLmNvbSIsImlhdCI6MTY5MzA1MDk3NCwiZXhwIjoxNjkzOTE0OTc0fQ.-duGsO9RwWDXfp6lf3v-K8g9V-AhV694aayGLEp9MSc"
+        },
+        "introspect": false
+      },
+      "Production": {
+        "url": "https://poly-server.nitinp.dev/graphql",
+        "headers": {
+          "user-agent": "JS GraphQL"
+        },
+        "introspect": false
+      }
+    }
+  }
+}

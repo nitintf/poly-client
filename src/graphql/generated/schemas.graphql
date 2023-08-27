@@ -1,0 +1,41 @@
+type Auth {
+  """JWT Bearer token"""
+  token: String!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+type Mutation {
+  login(LoginInput: LoginInput!): Auth!
+  signup(SignupInput: SignupInput!): Auth!
+}
+
+type Query {
+  users: [User!]!
+}
+
+input SignupInput {
+  email: String!
+  firstName: String!
+  lastName: String!
+  password: String!
+}
+
+type User {
+  avatar: String!
+  createdAt: Date!
+  email: String!
+  firstName: String!
+  id: ID!
+  lastName: String!
+  socialId: String
+  socialProvider: String
+  updatedAt: Date!
+  userVerified: Boolean!
+}

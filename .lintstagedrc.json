@@ -1,0 +1,5 @@
+{
+  "**/*.{js,jsx,xml,yml,webmanifest,md}": ["prettier --write"],
+  "**/*.{css,scss,sass,less}": ["prettier --write", "stylelint --fix"],
+  "**/*.{ts,tsx,json,htm,html}": ["prettier --write", "eslint --fix"]
+}
