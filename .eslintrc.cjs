@@ -142,5 +142,6 @@ module.exports = {
     'promise/always-return': 'warn',
     'jsdoc/require-jsdoc': 'off',
     'testing-library/await-async-utils': 'warn',
+    'import/no-extraneous-dependencies': 'off',
   },
 };

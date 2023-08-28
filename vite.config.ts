@@ -27,6 +27,9 @@ const config: Config = {
     origin: environment.APP_ORIGIN,
     hostname: new URL(environment.APP_ORIGIN).hostname,
   },
+  api: {
+    url: new URL(environment.API_ORIGIN).hostname,
+  },
 };
 
 // Pass client-side configuration to the web app
