@@ -7,7 +7,7 @@ import { resolve } from 'node:path';
 import { URL } from 'node:url';
 import envars from 'envars';
 
-import { Config } from './config';
+import { Config } from './src/config';
 
 let environmentName = process.env.NODE_ENV;
 

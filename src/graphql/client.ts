@@ -3,7 +3,7 @@ import { setContext } from '@apollo/client/link/context';
 import { ErrorResponse, onError } from '@apollo/client/link/error';
 import { createUploadLink } from 'apollo-upload-client';
 import { useUser } from '~/store';
-import { config } from 'config';
+import { config } from '~/config';
 
 const errorHandler = (error: ErrorResponse) => {
   if (error?.networkError) {
