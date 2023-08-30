@@ -54,4 +54,12 @@ export default defineConfig({
       provider: 'v8',
     },
   },
+  server: {
+    proxy: {
+      '/graphql': {
+        target: environment.API_ORIGIN,
+        changeOrigin: true,
+      },
+    },
+  },
 });

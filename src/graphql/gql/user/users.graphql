@@ -1,0 +1,10 @@
+query Users {
+  users {
+    avatar,
+    email, 
+    firstName
+    id
+    socialId
+    userVerified
+  }
+}
