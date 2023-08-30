@@ -14,6 +14,11 @@ export type SignUpMutationVariables = Types.Exact<{
 
 export type SignUpMutation = { __typename?: 'Mutation', signup: { __typename?: 'Auth', token: string } };
 
+export type UsersQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'User', avatar: string, email: string, firstName: string, id: string, socialId?: string | null, userVerified: boolean }> };
+
 /**
  * @typedef {Object} Auth
  * @property {string} token - JWT Bearer token

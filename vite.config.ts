@@ -7,7 +7,7 @@ import { resolve } from 'node:path';
 import { URL } from 'node:url';
 import envars from 'envars';
 
-import { Config } from './config';
+import { Config } from './src/config';
 
 let environmentName = process.env.NODE_ENV;
 
@@ -26,6 +26,9 @@ const config: Config = {
     name: environment.APP_NAME,
     origin: environment.APP_ORIGIN,
     hostname: new URL(environment.APP_ORIGIN).hostname,
+  },
+  api: {
+    url: new URL(environment.API_ORIGIN).hostname,
   },
 };
 
@@ -49,6 +52,14 @@ export default defineConfig({
       include: ['src/**/*.{ts,tsx}'],
       all: true,
       provider: 'v8',
+    },
+  },
+  server: {
+    proxy: {
+      '/graphql': {
+        target: environment.API_ORIGIN,
+        changeOrigin: true,
+      },
     },
   },
 });

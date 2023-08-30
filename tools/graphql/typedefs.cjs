@@ -1,4 +1,5 @@
-/* eslint-disable */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable @typescript-eslint/no-var-requires */
 
 const { printSchemaWithDirectives } = require('@graphql-tools/utils');
 const { stripIgnoredCharacters } = require('graphql');

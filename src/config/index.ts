@@ -5,6 +5,9 @@ export type Config = {
     origin: string;
     hostname: string;
   };
+  api: {
+    url: string;
+  };
 };
 
-export const config = JSON.parse(import.meta.env.VITE_CONFIG);
+export const config: Config = JSON.parse(import.meta.env.VITE_CONFIG);
