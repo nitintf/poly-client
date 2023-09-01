@@ -5,7 +5,7 @@ type UserProperties = {
   userId: string | null;
   token: string | null;
   setUserId: (userId: string) => void;
-  setToken: (token: string) => void;
+  setToken: (token: string | null) => void;
 };
 
 export const useUser = create(

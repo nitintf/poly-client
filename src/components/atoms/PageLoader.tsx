@@ -1,5 +1,5 @@
 import { Loader2 } from 'lucide-react';
-import { Flex } from './ui/flex';
+import { Flex } from '../ui/flex';
 
 export const PageLoader = () => {
   return (
