@@ -1,5 +1,12 @@
 import * as Types from './schemas';
 
+export type ForgotPasswordMutationVariables = Types.Exact<{
+  input: Types.ForgotPasswordInput;
+}>;
+
+
+export type ForgotPasswordMutation = { __typename?: 'Mutation', forgotPassword?: { __typename?: 'SuccessOutput', success: boolean } | null };
+
 export type LoginMutationVariables = Types.Exact<{
   loginInput: Types.LoginInput;
 }>;
@@ -7,12 +14,19 @@ export type LoginMutationVariables = Types.Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'Auth', token: string } };
 
+export type ResetPasswordMutationVariables = Types.Exact<{
+  input: Types.ResetPasswordInput;
+}>;
+
+
+export type ResetPasswordMutation = { __typename?: 'Mutation', resetPassword?: { __typename?: 'SuccessOutput', success: boolean } | null };
+
 export type SignUpMutationVariables = Types.Exact<{
   signupInput: Types.SignupInput;
 }>;
 
 
-export type SignUpMutation = { __typename?: 'Mutation', signup: { __typename?: 'Auth', token: string } };
+export type SignUpMutation = { __typename?: 'Mutation', signup: { __typename?: 'SignupOutput', verificaitonLinkSent: boolean } };
 
 export type UsersQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
@@ -30,20 +44,35 @@ export type UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'Us
  */
 
 /**
+ * @typedef {Object} ForgotPasswordInput
+ * @property {string} email
+ */
+
+/**
  * @typedef {Object} LoginInput
  * @property {string} email
  * @property {string} password
+ * @property {boolean} rememberMe
  */
 
 /**
  * @typedef {Object} Mutation
+ * @property {SuccessOutput} [forgotPassword]
  * @property {Auth} login
- * @property {Auth} signup
+ * @property {SuccessOutput} [resetPassword]
+ * @property {SignupOutput} signup
  */
 
 /**
  * @typedef {Object} Query
+ * @property {User} me
  * @property {Array<User>} users
+ */
+
+/**
+ * @typedef {Object} ResetPasswordInput
+ * @property {string} password
+ * @property {string} token
  */
 
 /**
@@ -52,6 +81,16 @@ export type UsersQuery = { __typename?: 'Query', users: Array<{ __typename?: 'Us
  * @property {string} firstName
  * @property {string} lastName
  * @property {string} password
+ */
+
+/**
+ * @typedef {Object} SignupOutput
+ * @property {boolean} verificaitonLinkSent - Varications link sent or not
+ */
+
+/**
+ * @typedef {Object} SuccessOutput
+ * @property {boolean} success
  */
 
 /**

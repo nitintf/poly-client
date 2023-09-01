@@ -1,5 +1,5 @@
 import Sentry, { BrowserTracing } from '@sentry/react';
-import { config } from '~/config';
+import { config } from '@/config';
 
 export const setupSentry = (options: Sentry.BrowserOptions = {}) => {
   return Sentry.init({

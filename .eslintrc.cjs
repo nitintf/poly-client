@@ -51,7 +51,6 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:jsx-a11y/strict',
     'plugin:prettier/recommended',
-    'plugin:styled-components-a11y/recommended',
     'plugin:promise/recommended',
     'plugin:unicorn/recommended',
     'plugin:storybook/recommended',
@@ -68,7 +67,6 @@ module.exports = {
     '@typescript-eslint',
     'jsx-a11y',
     'prettier',
-    'styled-components-a11y',
     'promise',
     'unicorn',
     'import',
@@ -143,5 +141,9 @@ module.exports = {
     'jsdoc/require-jsdoc': 'off',
     'testing-library/await-async-utils': 'warn',
     'import/no-extraneous-dependencies': 'off',
+    'react/prop-types': 'off',
+    'react/jsx-no-constructed-context-values': 'off',
+    'jsx-a11y/label-has-associated-control': 'off',
+    'jsx-a11y/heading-has-content': 'off'
   },
 };

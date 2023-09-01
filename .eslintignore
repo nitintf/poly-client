@@ -9,3 +9,5 @@ vite.config.ts
 node_modules
 tsconfig.json
 tsconfig.node.json
+tailwind.config.cjs
+postcss.config.cjs

@@ -1,11 +1,17 @@
 import { Outlet } from 'react-router-dom';
-import '~/App.scss';
+import { ThemeProvider } from '@/theme/ThemeProvider';
+import { Suspense } from 'react';
+import { Toaster } from '@/components/ui/toaster';
+import { PageLoader } from '@/components/PageLoader';
 
 function App() {
   return (
-    <div className="card">
-      <Outlet />
-    </div>
+    <Suspense fallback={<PageLoader />}>
+      <ThemeProvider defaultTheme="dark">
+        <Outlet />
+        <Toaster />
+      </ThemeProvider>
+    </Suspense>
   );
 }
 

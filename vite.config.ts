@@ -6,6 +6,7 @@ import tsconfigPaths from 'vite-tsconfig-paths';
 import { resolve } from 'node:path';
 import { URL } from 'node:url';
 import envars from 'envars';
+import svgr from 'vite-plugin-svgr';
 
 import { Config } from './src/config';
 
@@ -28,7 +29,7 @@ const config: Config = {
     hostname: new URL(environment.APP_ORIGIN).hostname,
   },
   api: {
-    url: new URL(environment.API_ORIGIN).hostname,
+    url: environment.API_ORIGIN,
   },
 };
 
@@ -40,8 +41,8 @@ process.env.VITE_CONFIG = JSON.stringify(config);
 export default defineConfig({
   base: './',
   cacheDir: `../.cache/vite-app`,
-  plugins: [react(), tsconfigPaths()],
-  css: { postcss: { plugins: [] } },
+  plugins: [svgr(), react(), tsconfigPaths()],
+  // css: { postcss: { plugins: [] } },
   test: {
     cache: { dir: '../.cache/vitest' },
     setupFiles: ['./tests/setup.ts'],

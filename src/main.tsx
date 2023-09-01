@@ -1,4 +1,6 @@
-import React from 'react';
+import './index.css';
+
+import React, { lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
 import { ApolloProvider } from '@apollo/client';
@@ -16,12 +18,14 @@ import {
   PublicRoutes,
   PublicUnauthenticatedRoutes,
   generateRoutes,
-} from '~/routes';
+} from '@/routes';
 
-import '~/index.scss';
-import { setupI18n } from '~/lib/i18n';
-import { client } from '~/graphql/client';
+import { setupI18n } from '@/lib/i18n';
+import { client } from '@/graphql/client';
 import App from './App';
+import { ROUTES } from './constants/routes';
+
+const AuthCallbackPage = lazy(() => import('@/pages/AuthCallback'));
 
 const i18n = setupI18n();
 
@@ -35,6 +39,7 @@ const router = createBrowserRouter(
       </Route>
 
       <Route element={<PublicRoutes />}>{generateRoutes(publicRoutes)}</Route>
+      <Route path={ROUTES.AUTH_CALLBACK} element={<AuthCallbackPage />} />
     </Route>,
   ),
 );

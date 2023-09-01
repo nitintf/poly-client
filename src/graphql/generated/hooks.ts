@@ -4,6 +4,39 @@ import { gql } from '@apollo/client';
 import * as Apollo from '@apollo/client';
 const defaultOptions = {} as const;
 
+export const ForgotPasswordDocument = gql`
+    mutation ForgotPassword($input: ForgotPasswordInput!) {
+  forgotPassword(ForgotPasswordInput: $input) {
+    success
+  }
+}
+    `;
+export type ForgotPasswordMutationFn = Apollo.MutationFunction<Types.ForgotPasswordMutation, Types.ForgotPasswordMutationVariables>;
+
+/**
+ * __useForgotPasswordMutation__
+ *
+ * To run a mutation, you first call `useForgotPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useForgotPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [forgotPasswordMutation, { data, loading, error }] = useForgotPasswordMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useForgotPasswordMutation(baseOptions?: Apollo.MutationHookOptions<Types.ForgotPasswordMutation, Types.ForgotPasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<Types.ForgotPasswordMutation, Types.ForgotPasswordMutationVariables>(ForgotPasswordDocument, options);
+      }
+export type ForgotPasswordMutationHookResult = ReturnType<typeof useForgotPasswordMutation>;
+export type ForgotPasswordMutationResult = Apollo.MutationResult<Types.ForgotPasswordMutation>;
+export type ForgotPasswordMutationOptions = Apollo.BaseMutationOptions<Types.ForgotPasswordMutation, Types.ForgotPasswordMutationVariables>;
 export const LoginDocument = gql`
     mutation Login($loginInput: LoginInput!) {
   login(LoginInput: $loginInput) {
@@ -37,10 +70,43 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<Types.
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<Types.LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<Types.LoginMutation, Types.LoginMutationVariables>;
+export const ResetPasswordDocument = gql`
+    mutation ResetPassword($input: ResetPasswordInput!) {
+  resetPassword(ResetPasswordInput: $input) {
+    success
+  }
+}
+    `;
+export type ResetPasswordMutationFn = Apollo.MutationFunction<Types.ResetPasswordMutation, Types.ResetPasswordMutationVariables>;
+
+/**
+ * __useResetPasswordMutation__
+ *
+ * To run a mutation, you first call `useResetPasswordMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useResetPasswordMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [resetPasswordMutation, { data, loading, error }] = useResetPasswordMutation({
+ *   variables: {
+ *      input: // value for 'input'
+ *   },
+ * });
+ */
+export function useResetPasswordMutation(baseOptions?: Apollo.MutationHookOptions<Types.ResetPasswordMutation, Types.ResetPasswordMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<Types.ResetPasswordMutation, Types.ResetPasswordMutationVariables>(ResetPasswordDocument, options);
+      }
+export type ResetPasswordMutationHookResult = ReturnType<typeof useResetPasswordMutation>;
+export type ResetPasswordMutationResult = Apollo.MutationResult<Types.ResetPasswordMutation>;
+export type ResetPasswordMutationOptions = Apollo.BaseMutationOptions<Types.ResetPasswordMutation, Types.ResetPasswordMutationVariables>;
 export const SignUpDocument = gql`
     mutation SignUp($signupInput: SignupInput!) {
   signup(SignupInput: $signupInput) {
-    token
+    verificaitonLinkSent
   }
 }
     `;
@@ -123,20 +189,35 @@ export function refetchUsersQuery(variables?: Types.UsersQueryVariables) {
  */
 
 /**
+ * @typedef {Object} ForgotPasswordInput
+ * @property {string} email
+ */
+
+/**
  * @typedef {Object} LoginInput
  * @property {string} email
  * @property {string} password
+ * @property {boolean} rememberMe
  */
 
 /**
  * @typedef {Object} Mutation
+ * @property {SuccessOutput} [forgotPassword]
  * @property {Auth} login
- * @property {Auth} signup
+ * @property {SuccessOutput} [resetPassword]
+ * @property {SignupOutput} signup
  */
 
 /**
  * @typedef {Object} Query
+ * @property {User} me
  * @property {Array<User>} users
+ */
+
+/**
+ * @typedef {Object} ResetPasswordInput
+ * @property {string} password
+ * @property {string} token
  */
 
 /**
@@ -145,6 +226,16 @@ export function refetchUsersQuery(variables?: Types.UsersQueryVariables) {
  * @property {string} firstName
  * @property {string} lastName
  * @property {string} password
+ */
+
+/**
+ * @typedef {Object} SignupOutput
+ * @property {boolean} verificaitonLinkSent - Varications link sent or not
+ */
+
+/**
+ * @typedef {Object} SuccessOutput
+ * @property {boolean} success
  */
 
 /**

@@ -1,5 +1,5 @@
 mutation SignUp ($signupInput: SignupInput!) {
   signup(SignupInput: $signupInput) {
-    token
+    verificaitonLinkSent
   }
 }

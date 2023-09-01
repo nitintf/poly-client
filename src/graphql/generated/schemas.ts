@@ -31,20 +31,37 @@ export type Auth = {
   token: Scalars['String']['output'];
 };
 
+export type ForgotPasswordInput = {
+  email: Scalars['String']['input'];
+};
+
 export type LoginInput = {
   email: Scalars['String']['input'];
   password: Scalars['String']['input'];
+  rememberMe: Scalars['Boolean']['input'];
 };
 
 export type Mutation = {
   __typename?: 'Mutation';
+  forgotPassword?: Maybe<SuccessOutput>;
   login: Auth;
-  signup: Auth;
+  resetPassword?: Maybe<SuccessOutput>;
+  signup: SignupOutput;
+};
+
+
+export type MutationForgotPasswordArgs = {
+  ForgotPasswordInput: ForgotPasswordInput;
 };
 
 
 export type MutationLoginArgs = {
   LoginInput: LoginInput;
+};
+
+
+export type MutationResetPasswordArgs = {
+  ResetPasswordInput: ResetPasswordInput;
 };
 
 
@@ -54,7 +71,13 @@ export type MutationSignupArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  me: User;
   users: Array<User>;
+};
+
+export type ResetPasswordInput = {
+  password: Scalars['String']['input'];
+  token: Scalars['String']['input'];
 };
 
 export type SignupInput = {
@@ -62,6 +85,17 @@ export type SignupInput = {
   firstName: Scalars['String']['input'];
   lastName: Scalars['String']['input'];
   password: Scalars['String']['input'];
+};
+
+export type SignupOutput = {
+  __typename?: 'SignupOutput';
+  /** Varications link sent or not */
+  verificaitonLinkSent: Scalars['Boolean']['output'];
+};
+
+export type SuccessOutput = {
+  __typename?: 'SuccessOutput';
+  success: Scalars['Boolean']['output'];
 };
 
 export type User = {
@@ -152,12 +186,16 @@ export type ResolversTypes = {
   Auth: ResolverTypeWrapper<Auth>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   Date: ResolverTypeWrapper<Scalars['Date']['output']>;
+  ForgotPasswordInput: ForgotPasswordInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   LoginInput: LoginInput;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
+  ResetPasswordInput: ResetPasswordInput;
   SignupInput: SignupInput;
+  SignupOutput: ResolverTypeWrapper<SignupOutput>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  SuccessOutput: ResolverTypeWrapper<SuccessOutput>;
   User: ResolverTypeWrapper<User>;
 };
 
@@ -166,12 +204,16 @@ export type ResolversParentTypes = {
   Auth: Auth;
   Boolean: Scalars['Boolean']['output'];
   Date: Scalars['Date']['output'];
+  ForgotPasswordInput: ForgotPasswordInput;
   ID: Scalars['ID']['output'];
   LoginInput: LoginInput;
   Mutation: {};
   Query: {};
+  ResetPasswordInput: ResetPasswordInput;
   SignupInput: SignupInput;
+  SignupOutput: SignupOutput;
   String: Scalars['String']['output'];
+  SuccessOutput: SuccessOutput;
   User: User;
 };
 
@@ -185,12 +227,25 @@ export interface DateScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 }
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  forgotPassword?: Resolver<Maybe<ResolversTypes['SuccessOutput']>, ParentType, ContextType, RequireFields<MutationForgotPasswordArgs, 'ForgotPasswordInput'>>;
   login?: Resolver<ResolversTypes['Auth'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'LoginInput'>>;
-  signup?: Resolver<ResolversTypes['Auth'], ParentType, ContextType, RequireFields<MutationSignupArgs, 'SignupInput'>>;
+  resetPassword?: Resolver<Maybe<ResolversTypes['SuccessOutput']>, ParentType, ContextType, RequireFields<MutationResetPasswordArgs, 'ResetPasswordInput'>>;
+  signup?: Resolver<ResolversTypes['SignupOutput'], ParentType, ContextType, RequireFields<MutationSignupArgs, 'SignupInput'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  me?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
   users?: Resolver<Array<ResolversTypes['User']>, ParentType, ContextType>;
+};
+
+export type SignupOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['SignupOutput'] = ResolversParentTypes['SignupOutput']> = {
+  verificaitonLinkSent?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type SuccessOutputResolvers<ContextType = any, ParentType extends ResolversParentTypes['SuccessOutput'] = ResolversParentTypes['SuccessOutput']> = {
+  success?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
@@ -212,6 +267,8 @@ export type Resolvers<ContextType = any> = {
   Date?: GraphQLScalarType;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
+  SignupOutput?: SignupOutputResolvers<ContextType>;
+  SuccessOutput?: SuccessOutputResolvers<ContextType>;
   User?: UserResolvers<ContextType>;
 };
 
@@ -227,10 +284,24 @@ export const isDefinedNonNullAny = (v: any): v is definedNonNullAny => v !== und
 
 export const definedNonNullAnySchema = z.any().refine((v) => isDefinedNonNullAny(v));
 
+export function ForgotPasswordInputSchema(): z.ZodObject<Properties<ForgotPasswordInput>> {
+  return z.object({
+    email: z.string()
+  })
+}
+
 export function LoginInputSchema(): z.ZodObject<Properties<LoginInput>> {
   return z.object({
     email: z.string(),
-    password: z.string()
+    password: z.string(),
+    rememberMe: z.boolean()
+  })
+}
+
+export function ResetPasswordInputSchema(): z.ZodObject<Properties<ResetPasswordInput>> {
+  return z.object({
+    password: z.string(),
+    token: z.string()
   })
 }
 
@@ -254,20 +325,35 @@ export function SignupInputSchema(): z.ZodObject<Properties<SignupInput>> {
  */
 
 /**
+ * @typedef {Object} ForgotPasswordInput
+ * @property {string} email
+ */
+
+/**
  * @typedef {Object} LoginInput
  * @property {string} email
  * @property {string} password
+ * @property {boolean} rememberMe
  */
 
 /**
  * @typedef {Object} Mutation
+ * @property {SuccessOutput} [forgotPassword]
  * @property {Auth} login
- * @property {Auth} signup
+ * @property {SuccessOutput} [resetPassword]
+ * @property {SignupOutput} signup
  */
 
 /**
  * @typedef {Object} Query
+ * @property {User} me
  * @property {Array<User>} users
+ */
+
+/**
+ * @typedef {Object} ResetPasswordInput
+ * @property {string} password
+ * @property {string} token
  */
 
 /**
@@ -276,6 +362,16 @@ export function SignupInputSchema(): z.ZodObject<Properties<SignupInput>> {
  * @property {string} firstName
  * @property {string} lastName
  * @property {string} password
+ */
+
+/**
+ * @typedef {Object} SignupOutput
+ * @property {boolean} verificaitonLinkSent - Varications link sent or not
+ */
+
+/**
+ * @typedef {Object} SuccessOutput
+ * @property {boolean} success
  */
 
 /**
@@ -293,4 +389,4 @@ export function SignupInputSchema(): z.ZodObject<Properties<SignupInput>> {
  */
 
 import { gql } from "@apollo/client/core"
-export const typeDefs = gql('schema{query:Query mutation:Mutation}type Auth{"""JWT Bearer token""" token:String!}"""Date custom scalar type""" scalar Date input LoginInput{email:String!password:String!}type Mutation{login(LoginInput:LoginInput!):Auth!signup(SignupInput:SignupInput!):Auth!}type Query{users:[User!]!}input SignupInput{email:String!firstName:String!lastName:String!password:String!}type User{avatar:String!createdAt:Date!email:String!firstName:String!id:ID!lastName:String!socialId:String socialProvider:String updatedAt:Date!userVerified:Boolean!}');
+export const typeDefs = gql('schema{query:Query mutation:Mutation}type Auth{"""JWT Bearer token""" token:String!}"""Date custom scalar type""" scalar Date input ForgotPasswordInput{email:String!}input LoginInput{email:String!password:String!rememberMe:Boolean!}type Mutation{forgotPassword(ForgotPasswordInput:ForgotPasswordInput!):SuccessOutput login(LoginInput:LoginInput!):Auth!resetPassword(ResetPasswordInput:ResetPasswordInput!):SuccessOutput signup(SignupInput:SignupInput!):SignupOutput!}type Query{me:User!users:[User!]!}input ResetPasswordInput{password:String!token:String!}input SignupInput{email:String!firstName:String!lastName:String!password:String!}type SignupOutput{"""Varications link sent or not""" verificaitonLinkSent:Boolean!}type SuccessOutput{success:Boolean!}type User{avatar:String!createdAt:Date!email:String!firstName:String!id:ID!lastName:String!socialId:String socialProvider:String updatedAt:Date!userVerified:Boolean!}');
