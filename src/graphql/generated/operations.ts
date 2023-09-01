@@ -14,6 +14,11 @@ export type LoginMutationVariables = Types.Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'Auth', token: string } };
 
+export type MeQueryVariables = Types.Exact<{ [key: string]: never; }>;
+
+
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'User', id: string, email: string, firstName: string, lastName: string, userVerified: boolean, avatar: string } };
+
 export type ResetPasswordMutationVariables = Types.Exact<{
   input: Types.ResetPasswordInput;
 }>;
