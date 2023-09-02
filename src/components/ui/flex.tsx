@@ -1,7 +1,7 @@
 import React from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 
 const flexVariants = cva('flex gap-5', {
   variants: {
@@ -52,10 +52,12 @@ const flexVariants = cva('flex gap-5', {
 export interface FlexProperties extends VariantProps<typeof flexVariants> {
   children?: React.ReactNode;
   className?: string;
+  as?: keyof JSX.IntrinsicElements;
 }
 
-const Flex: React.FC<FlexProperties> = ({ className, children, ...variants }) => {
-  return <div className={cn(flexVariants(variants), className)}>{children}</div>;
+const Flex: React.FC<FlexProperties> = ({ className, children, as, ...variants }) => {
+  const Tag = as ?? 'div';
+  return <Tag className={cn(flexVariants(variants), className)}>{children}</Tag>;
 };
 
 export { Flex, flexVariants };

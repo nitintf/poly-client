@@ -21,6 +21,10 @@ export const LoginForm = () => {
   const { setToken } = useUser();
   const loginForm = useForm<z.infer<typeof loginFormSchema>>({
     resolver: zodResolver(loginFormSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
   });
   const [rememberMe, setRememberMe] = useState(false);
 

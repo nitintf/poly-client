@@ -1,25 +1,20 @@
+import { PolyLogo } from '@/components/atoms/PolyLogo';
 import { LoginForm } from '@/components/forms/LoginForm';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ROUTES } from '@/constants/routes';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import { AlertDestructive } from '@/components/atoms/Alert';
 
 const LoginPage = () => {
+  const [searchParameters] = useSearchParams();
+  const loginError = searchParameters.get('error');
+
   return (
     <section className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-      <Link
-        to="/"
-        className="flex justify-center items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white w-min"
-      >
-        <img
-          className="w-8 h-8 mr-2"
-          src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-          alt="logo"
-        />
-        Poly
-      </Link>
+      <PolyLogo />
       <Card className="sm:max-w-md w-full">
-        <CardHeader>
+        <CardHeader className="!pb-2">
           <CardTitle>Login To Your Account</CardTitle>
           <CardDescription>
             Start your projects in seconds. New to Poly?
@@ -29,6 +24,7 @@ const LoginPage = () => {
               </Button>
             </Link>
           </CardDescription>
+          {loginError && <AlertDestructive title="Error" description={loginError} />}
         </CardHeader>
         <CardContent>
           <LoginForm />

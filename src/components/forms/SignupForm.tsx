@@ -20,6 +20,13 @@ export const SignupForm = () => {
   const { toast } = useToast();
   const loginForm = useForm<z.infer<typeof signupFormSchema>>({
     resolver: zodResolver(signupFormSchema),
+    defaultValues: {
+      confirmPassword: '',
+      email: '',
+      firstName: '',
+      lastName: '',
+      password: '',
+    },
   });
 
   const [signupMutation, { loading }] = useSignUpMutation();
@@ -50,7 +57,7 @@ export const SignupForm = () => {
       <SocialAuth loading={loading} alignment="row" />
       <Flex align="center">
         <Separator />
-        <p className="text-center px-5">or</p>
+        <p className="text-center px-3">or</p>
         <Separator />
       </Flex>
       <form className="space-y-3" onSubmit={loginForm.handleSubmit(handleSubmitMutation)}>

@@ -5,7 +5,7 @@ import * as z from 'zod';
 import { Link } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes';
 import { useForgotPasswordMutation } from '@/graphql/generated';
-import { cn } from '@/lib/utils';
+import { cn } from '@/lib/utils/cn';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form';
 import { Input } from '../ui/input';
 import { Button, buttonVariants } from '../ui/button';
@@ -16,6 +16,9 @@ export const ForgotPasswordForm = () => {
   const { toast } = useToast();
   const forgotPassowrdForm = useForm<z.infer<typeof forgotPasswordSchema>>({
     resolver: zodResolver(forgotPasswordSchema),
+    defaultValues: {
+      email: '',
+    },
   });
 
   const [forgotPasswordMutation, { loading }] = useForgotPasswordMutation();

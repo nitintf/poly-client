@@ -8,8 +8,8 @@ export const resetPasswordSchema = z
   .object({
     password: z
       .string()
-      .min(6, { message: 'Password must be at least 6 characters' })
-      .max(18, { message: 'Password must be at least 18 characters' }),
+      .min(8, { message: 'Password must be at least 8 characters' })
+      .max(30, { message: 'Password must be at least 30 characters' }),
     confirmPassword: z.string(),
   })
   .refine((data) => data.password === data.confirmPassword, {

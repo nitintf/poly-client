@@ -1,5 +1,11 @@
+import { TopNavbar } from '@/components/atoms/TopNavbar';
+
 const DashboardPage = () => {
-  return <h1>Dashboard</h1>;
+  return (
+    <main>
+      <TopNavbar />
+    </main>
+  );
 };
 
 export default DashboardPage;
