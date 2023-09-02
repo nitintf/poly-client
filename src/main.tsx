@@ -3,7 +3,6 @@ import './index.css';
 import React, { lazy } from 'react';
 import ReactDOM from 'react-dom/client';
 import { I18nextProvider } from 'react-i18next';
-import { ApolloProvider } from '@apollo/client';
 import {
   RouterProvider,
   Route,
@@ -21,10 +20,9 @@ import {
 } from '@/routes';
 
 import { setupI18n } from '@/lib/i18n';
-import { client } from '@/graphql/client';
-import App from './App';
-import { ROUTES } from './constants/routes';
-import { ErrorNotifier } from './components/atoms/error';
+import { PolyApolloProvider } from '@/graphql/provider';
+import App from '@/App';
+import { ROUTES } from '@/constants/routes';
 
 const AuthCallbackPage = lazy(() => import('@/pages/AuthCallback'));
 
@@ -47,14 +45,10 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.querySelector('#root')!).render(
   <React.StrictMode>
-    <ErrorNotifier>
-      {(showError) => (
-        <ApolloProvider client={client(showError)}>
-          <I18nextProvider i18n={i18n}>
-            <RouterProvider router={router} />
-          </I18nextProvider>
-        </ApolloProvider>
-      )}
-    </ErrorNotifier>
+    <PolyApolloProvider>
+      <I18nextProvider i18n={i18n}>
+        <RouterProvider router={router} />
+      </I18nextProvider>
+    </PolyApolloProvider>
   </React.StrictMode>,
 );

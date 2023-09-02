@@ -33,8 +33,8 @@ const uploadLink: any = createUploadLink({
   uri: `${config.app.origin}/graphql`,
 });
 
-export const client = (showError: (properties: ToastProperties) => void) =>
-  new ApolloClient({
+export const client = (showError: (properties: ToastProperties) => void) => {
+  return new ApolloClient({
     link: ApolloLink.from([onError(getErrorHandler(showError)), authLink, uploadLink]),
     cache: new InMemoryCache({ addTypename: false }),
     defaultOptions: {
@@ -46,3 +46,4 @@ export const client = (showError: (properties: ToastProperties) => void) =>
       },
     },
   });
+};
