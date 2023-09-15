@@ -23,6 +23,7 @@ import { setupI18n } from '@/lib/i18n';
 import { PolyApolloProvider } from '@/graphql/provider';
 import App from '@/App';
 import { ROUTES } from '@/constants/routes';
+import { ToastProvider } from './components/ui/toast';
 
 const AuthCallbackPage = lazy(() => import('@/pages/AuthCallback'));
 
@@ -45,10 +46,12 @@ const router = createBrowserRouter(
 
 ReactDOM.createRoot(document.querySelector('#root')!).render(
   <React.StrictMode>
-    <PolyApolloProvider>
-      <I18nextProvider i18n={i18n}>
-        <RouterProvider router={router} />
-      </I18nextProvider>
-    </PolyApolloProvider>
+    <ToastProvider>
+      <PolyApolloProvider>
+        <I18nextProvider i18n={i18n}>
+          <RouterProvider router={router} />
+        </I18nextProvider>
+      </PolyApolloProvider>
+    </ToastProvider>
   </React.StrictMode>,
 );

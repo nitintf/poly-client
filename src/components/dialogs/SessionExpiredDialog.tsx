@@ -7,17 +7,22 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import { config } from '@/config';
 import { ROUTES } from '@/constants/routes';
 import { useUser } from '@/store';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export function SessionExpiredDialog() {
   const { setToken } = useUser();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const redirectRoute = `${ROUTES.LOGIN}/${
+    pathname === '/' ? '' : `?continue=${config.app.url}${pathname}`
+  }`;
 
   const handleOnClick = () => {
     setToken(null);
-    navigate(ROUTES.LOGIN);
+    navigate(redirectRoute);
   };
 
   return (

@@ -43,6 +43,7 @@ export const AccountDropdown: React.FC<AccountDropdownProperties> = ({ children 
   const { setToken } = useUser();
 
   const handleLogout = () => {
+    // client.
     setToken(null);
   };
 

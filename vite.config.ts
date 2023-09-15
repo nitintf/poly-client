@@ -26,7 +26,7 @@ const config: Config = {
     env: environmentName,
     name: environment.APP_NAME,
     origin: environment.APP_ORIGIN,
-    hostname: new URL(environment.APP_ORIGIN).hostname,
+    url: environment.APP_ORIGIN,
   },
   api: {
     url: environment.API_ORIGIN,

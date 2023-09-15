@@ -6,4 +6,5 @@ export const ROUTES = {
   RESET_PASSWORD: '/reset-password',
   DASHBOARD: '/',
   ONBOARDING: '/onboarding',
+  ORGS: '/orgs',
 };

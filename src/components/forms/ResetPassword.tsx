@@ -11,7 +11,6 @@ import { Input } from '../ui/input';
 import { Button, buttonVariants } from '../ui/button';
 import { useToast } from '../../hooks/use-toast';
 import { Flex } from '../ui/flex';
-import { ToastAction } from '../ui/toast';
 
 export const ResetPasswordForm = () => {
   const [searchParameters] = useSearchParams();
@@ -40,7 +39,14 @@ export const ResetPasswordForm = () => {
       toast({
         variant: 'destructive',
         title: 'Uh oh! Something went wrong.',
-        description: errors[0].message,
+        description: (
+          <p>
+            {errors[0].message}You can create another from{' '}
+            <Button variant="link" className="!p-0 h-0">
+              <Link to={ROUTES.FORGOT_PASSWORD}>Here</Link>
+            </Button>
+          </p>
+        ),
       });
     }
 
@@ -50,9 +56,9 @@ export const ResetPasswordForm = () => {
         description:
           "You're all set to leap back into action! Head on over to the login screen and let the adventures continue!",
         action: (
-          <ToastAction altText="Login">
+          <Button variant="link" className="!p-0 h-0">
             <Link to={ROUTES.LOGIN}>Go to Login</Link>
-          </ToastAction>
+          </Button>
         ),
       });
     }

@@ -3,7 +3,7 @@ export type Config = {
     env: string;
     name: string;
     origin: string;
-    hostname: string;
+    url: string;
   };
   api: {
     url: string;

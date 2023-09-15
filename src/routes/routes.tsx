@@ -2,6 +2,7 @@ import { lazy } from 'react';
 import { PathRouteProps, Route } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes';
 import { Helmet } from 'react-helmet';
+import { OrganizationsPage } from '@/pages/Organization';
 
 const LoginPage = lazy(() => import('@/pages/Login'));
 const SignupPage = lazy(() => import('@/pages/Signup'));
@@ -41,14 +42,19 @@ export const publicUnauthenticatedRoutes: IRoute[] = [
 
 export const privateRoutes: IRoute[] = [
   {
+    path: ROUTES.ONBOARDING,
+    element: <OnboardingPage />,
+    title: 'Onboarding',
+  },
+  {
     path: ROUTES.DASHBOARD,
     element: <DashboardPage />,
     title: 'Dashboard',
   },
   {
-    path: ROUTES.ONBOARDING,
-    element: <OnboardingPage />,
-    title: 'Onboarding',
+    path: ROUTES.ORGS,
+    element: <OrganizationsPage />,
+    title: 'Organizations',
   },
 ];
 

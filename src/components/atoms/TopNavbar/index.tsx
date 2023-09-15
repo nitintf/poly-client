@@ -1,4 +1,4 @@
-import { Bell, HelpCircle, Settings, ChevronDown } from 'lucide-react';
+import { Bell, HelpCircle, Settings } from 'lucide-react';
 import { AvatarFallback } from '@radix-ui/react-avatar';
 import { User, useMeQuery } from '@/graphql/generated';
 import { cn, getUserFullName, getUserInitials } from '@/lib/utils';
@@ -13,7 +13,6 @@ import { Button } from '../../ui/button';
 import { TopNavLink, TopNavLinkContainer } from '../TopNavLink';
 
 const LINK_CLASS = 'px-2';
-const ICON_CLASS = 'w-3 h-3 ml-1 mt-1 text-slate-500 stroke-[4px]';
 const RIGHT_ICONS_CLASS = 'w-[18px] cursor-pointer';
 
 export const TopNavbar = () => {
@@ -29,33 +28,29 @@ export const TopNavbar = () => {
             <TopNavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Your Work
-                <ChevronDown className={cn(ICON_CLASS)} />
               </Button>
             </TopNavLink>
             <TopNavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Projects
-                <ChevronDown className={cn(ICON_CLASS)} />
               </Button>
             </TopNavLink>
             <TopNavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Dashboards
-                <ChevronDown className={cn(ICON_CLASS)} />
               </Button>
             </TopNavLink>
             <TopNavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Filters
-                <ChevronDown className={cn(ICON_CLASS)} />
               </Button>
             </TopNavLink>
             <TopNavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Teams
-                <ChevronDown className={cn(ICON_CLASS)} />
               </Button>
             </TopNavLink>
+            <Button size="sm">Create</Button>
           </TopNavLinkContainer>
         </Flex>
         <Flex className="gap-2 shrink-0">
