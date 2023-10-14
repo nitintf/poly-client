@@ -3,6 +3,7 @@ import { PathRouteProps, Route } from 'react-router-dom';
 import { ROUTES } from '@/constants/routes';
 import { Helmet } from 'react-helmet';
 import { OrganizationsPage } from '@/pages/Organization';
+import { MainLayout } from '@/layouts/MainLayout';
 
 const LoginPage = lazy(() => import('@/pages/Login'));
 const SignupPage = lazy(() => import('@/pages/Signup'));
@@ -12,9 +13,11 @@ const ForgotPasswordPage = lazy(() => import('@/pages/ForgotPassword'));
 const ResetPasswordPage = lazy(() => import('@/pages/ResetPassword'));
 
 type IRoute = PathRouteProps & {
-  readonly path: string;
-  readonly permission?: string;
-  readonly title: string;
+  path: string;
+  permission?: string;
+  title?: string;
+  routes?: IRoute[];
+  Layout?: React.FC<any>;
 };
 
 export const publicUnauthenticatedRoutes: IRoute[] = [
@@ -50,6 +53,7 @@ export const privateRoutes: IRoute[] = [
     path: ROUTES.DASHBOARD,
     element: <DashboardPage />,
     title: 'Dashboard',
+    Layout: MainLayout,
   },
   {
     path: ROUTES.ORGS,
@@ -61,16 +65,26 @@ export const privateRoutes: IRoute[] = [
 export const publicRoutes: IRoute[] = [];
 
 export const generateRoutes = (routes: IRoute[]) => {
-  return routes.map(({ path, element, title, ...rest }) => {
+  return routes.flatMap(({ path, element, title, routes, Layout, ...rest }) => {
     const Comp = () => (
       <>
-        <Helmet>
-          <title>{title} | Poly - Agile Project Management</title>
-        </Helmet>
-        {element}
+        {title && (
+          <Helmet>
+            <title>{title} | Poly - Agile Project Management</title>
+          </Helmet>
+        )}
+        {Layout ? <Layout>{element}</Layout> : element}
       </>
     );
 
-    return <Route key={path} path={path} Component={Comp} {...rest} />;
+    if (routes && routes.length > 0) {
+      return (
+        <Route key={path} path={path} element={<Comp />} {...rest}>
+          {generateRoutes(routes)}
+        </Route>
+      );
+    }
+
+    return <Route key={path} path={path} element={<Comp />} {...rest} />;
   });
 };

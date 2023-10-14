@@ -1,11 +1,7 @@
-import { TopNavbar } from '@/components/atoms/TopNavbar';
+import { PageContainer } from '@/components/ui/page-container';
 
 const DashboardPage = () => {
-  return (
-    <main>
-      <TopNavbar />
-    </main>
-  );
+  return <PageContainer />;
 };
 
 export default DashboardPage;

@@ -996,15 +996,6 @@
     "@graphql-codegen/visitor-plugin-common" "2.13.1"
     tslib "~2.4.0"
 
-"@graphql-codegen/introspection@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/introspection/-/introspection-4.0.0.tgz#1d851d8fb38efbeaf45128456e3010a16e6c9708"
-  integrity sha512-t9g3AkK99dfHblMWtG4ynUM9+A7JrWq5110zSpNV2wlSnv0+bRKagDW8gozwgXfR5i1IIG8QDjJZ6VgXQVqCZw==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "^5.0.0"
-    "@graphql-codegen/visitor-plugin-common" "^4.0.0"
-    tslib "~2.5.0"
-
 "@graphql-codegen/jsdoc@^2.3.6":
   version "2.3.6"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/jsdoc/-/jsdoc-2.3.6.tgz#b1140cd0760bbd9bf55debd3a738dd5548fd721a"

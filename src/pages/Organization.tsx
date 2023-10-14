@@ -1,3 +1,5 @@
+import { PageContainer } from '@/components/ui/page-container';
+
 export const OrganizationsPage = () => {
-  return <h1>Orgs</h1>;
+  return <PageContainer>Orgs</PageContainer>;
 };

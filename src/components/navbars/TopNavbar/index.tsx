@@ -7,10 +7,10 @@ import { AccountDropdown } from '@/components/dropdowns';
 import { Tooltip } from '@/components/ui/Tooltip';
 import { Flex } from '../../ui/flex';
 import { Separator } from '../../ui/separator';
-import { PolyLogo } from '../PolyLogo';
+import { PolyLogo } from '../../atoms/PolyLogo';
 import { Avatar, AvatarImage } from '../../ui/avatar';
 import { Button } from '../../ui/button';
-import { TopNavLink, TopNavLinkContainer } from '../TopNavLink';
+import { NavLink, NavLinkContainer } from '../NavLink';
 
 const LINK_CLASS = 'px-2';
 const RIGHT_ICONS_CLASS = 'w-[18px] cursor-pointer';
@@ -24,34 +24,34 @@ export const TopNavbar = () => {
         <Flex as="nav" justify="start" className="min-w-0 grow gap-1">
           <PolyLogo className="mb-0 mr-0" showText={false} logoClassName="w-6" />
           <SelectOrg />
-          <TopNavLinkContainer>
-            <TopNavLink>
+          <NavLinkContainer>
+            <NavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Your Work
               </Button>
-            </TopNavLink>
-            <TopNavLink>
+            </NavLink>
+            <NavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Projects
               </Button>
-            </TopNavLink>
-            <TopNavLink>
+            </NavLink>
+            <NavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Dashboards
               </Button>
-            </TopNavLink>
-            <TopNavLink>
+            </NavLink>
+            <NavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Filters
               </Button>
-            </TopNavLink>
-            <TopNavLink>
+            </NavLink>
+            <NavLink>
               <Button size="sm" variant="ghost" className={cn(LINK_CLASS)}>
                 Teams
               </Button>
-            </TopNavLink>
+            </NavLink>
             <Button size="sm">Create</Button>
-          </TopNavLinkContainer>
+          </NavLinkContainer>
         </Flex>
         <Flex className="gap-2 shrink-0">
           <Tooltip label="Notifications">

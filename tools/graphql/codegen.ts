@@ -63,9 +63,6 @@ const config: CodegenConfig = {
     'src/graphql/generated/schemas.graphql': {
       plugins: ['schema-ast'],
     },
-    'graphql.schema.json': {
-      plugins: ['introspection'],
-    },
   },
   hooks: {
     afterAllFileWrite: ['eslint --fix', 'prettier --write'],

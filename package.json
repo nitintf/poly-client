@@ -70,7 +70,6 @@
     "@commitlint/config-conventional": "^17.7.0",
     "@graphql-codegen/cli": "5.0.0",
     "@graphql-codegen/import-types-preset": "^2.2.6",
-    "@graphql-codegen/introspection": "^4.0.0",
     "@graphql-codegen/jsdoc": "^2.3.6",
     "@graphql-codegen/schema-ast": "^4.0.0",
     "@graphql-codegen/time": "^5.0.0",
