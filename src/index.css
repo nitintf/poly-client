@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --background:  0deg 0% 100% ;
-    --foreground:  222.2deg 84% 4.9% ;
+    --foreground:  218 24% 35%;
     --card:  0deg 0% 100% ;
     --card-foreground:  222.2deg 84% 4.9% ;
     --popover:  0, 0%, 100% ;
@@ -24,6 +24,8 @@
     --input:  214.3deg 31.8% 91.4% ;
     --input-border:  215, 14%, 34% ;
     --ring:  215, 100%, 38% ;
+    --tooltip: 218 24% 35%;
+    --tooltip-foreground:  0deg 0% 100%;
     --radius: 0.5rem;
 
     --top-navbar-height: 60px;
@@ -50,6 +52,8 @@
     --input:  217, 19%, 27% ;
     --input-border:  215, 14%, 34% ;
     --ring:  215, 100%, 38% ;
+    --tooltip: 217.2deg 32.6% 17.5% ;
+    --tooltip-foreground: 210deg 40% 98% ;
   }
 }
 

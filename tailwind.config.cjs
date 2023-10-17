@@ -49,6 +49,10 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        tooltip: {
+          DEFAULT: "hsl(var(--tooltip))",
+          foreground: "hsl(var(--tooltip-foreground))",
+        }
       },
       height: {
         navbar: "var(--top-navbar-height)",

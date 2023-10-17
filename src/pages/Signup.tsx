@@ -10,8 +10,8 @@ import { Balancer } from 'react-wrap-balancer';
 const SignUpPage = () => {
   return (
     <main className="flex items-center h-screen gap-x-40 mx-auto justify-normal">
-      <Flex className="w-full h-full items-stretch flex-wrap xl:flex-nowrap">
-        <section className="w-full xl:w-2/4 py-16 px-8 sm:px-6 md:px-20">
+      <Flex className="w-full h-full items-stretch">
+        <section className="w-full xl:w-2/4 py-16 px-8 sm:px-6 md:px-20 flex">
           <Flex>
             <div>
               <CardHeader className="py-0">
@@ -31,7 +31,7 @@ const SignUpPage = () => {
             </div>
           </Flex>
         </section>
-        <section className="flex px-10 py-16 w-full h-full xl:w-2/4 bg-primary">
+        <section className="px-10 py-16 w-full h-full xl:w-2/4 bg-primary hidden md:flex">
           <Flex direction="column" className="gap-y-4 justify-self-center">
             <Link
               to="/"
